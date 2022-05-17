@@ -19,8 +19,11 @@
 namespace Silaty {
     [GtkTemplate (ui = "/org/silaty/Silaty/window.ui")]
     public class Window : Gtk.ApplicationWindow {
-        [GtkChild]
-
+        [GtkChild] unowned Gtk.Widget main_view;
+        [GtkChild] unowned Adw.HeaderBar header_bar;
+        [GtkChild] unowned Adw.Leaflet leaflet;
+        [GtkChild] unowned Adw.ViewSwitcherTitle title;
+        [GtkChild] unowned Adw.ViewStack view_stack;
         public Window (Gtk.Application app) {
             Object (application: app);
         }

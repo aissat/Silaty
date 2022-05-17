@@ -2,6 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 menu primary_menu {
+
   section {
     item {
       label: _("_Preferences");
@@ -13,7 +14,7 @@ menu primary_menu {
       label: _("_Keyboard Shortcuts");
       action: "win.show-help-overlay";
     }
-    
+
     item {
       label: _("_About silaty");
       action: "app.about";
@@ -23,16 +24,138 @@ menu primary_menu {
 
 
 template SilatyWindow : Gtk.ApplicationWindow {
-  default-width : 600;
-  default-height : 300;
+  default-width : 560;
+  default-height : 600;
+  width-request: 560;
+  height-request: 600;
+  styles ["devel"]
 
   [titlebar]
-  Adw.HeaderBar {
-  	[end]
-  	Gtk.MenuButton {
-  		icon-name : "open-menu-symbolic";
-  		menu-model: primary_menu;
-  	}
-  	
+  Adw.HeaderBar header_bar {
+      //centering-policy: strict;
+
+      [title]
+      Adw.ViewSwitcherTitle title {
+            stack: view_stack;
+      }
+
+      /*[start]
+      Gtk.MenuButton {
+        icon-name : "open-menu-symbolic";
+        menu-model: primary_menu;
+      }*/
+  }
+
+  Adw.Leaflet leaflet {
+    can-navigate-back: true;
+    can-unfold: false;
+    Gtk.Box main_view {
+      orientation: vertical;
+
+      Gtk.Box {
+        orientation: vertical;
+        Adw.ViewStack view_stack {
+
+          Adw.ViewStackPage {
+            name: "home";
+            title: C_("Navigation", "Home");
+            icon-name: "user-home-symbolic";
+	    child: Adw.StatusPage {
+              title: '21:22';
+              description: 'Tuesday, May 17, 2022';
+              child: Adw.Clamp{
+              	maximum-size: 400;
+              	tightening-threshold: 300;
+              	child: Gtk.Box{
+              	  orientation: vertical;
+              	  spacing: 12;
+              	  Adw.PreferencesGroup{
+
+              	    Adw.ActionRow{
+              	      title: _("Fajr");
+              	      subtitle: _("2 rakaat");
+              	      Gtk.Label{
+              	        valign: center;
+              	      	label: _("03:15 AM");
+              	      }
+              	    }
+              	    Adw.ActionRow{
+              	      title: _("Fajr");
+              	      subtitle: _("2 rakaat");
+              	      Gtk.Label{
+              	        valign: center;
+              	      	label: _("03:15 AM");
+              	      }
+              	    }
+              	    Adw.ActionRow{
+              	      title: _("Fajr");
+              	      subtitle: _("2 rakaat");
+              	      Gtk.Label{
+              	        valign: center;
+              	      	label: _("03:15 AM");
+              	      }
+              	    }
+              	    Adw.ActionRow{
+              	      title: _("Fajr");
+              	      subtitle: _("2 rakaat");
+              	      Gtk.Label{
+              	        valign: center;
+              	      	label: _("03:15 AM");
+              	      }
+              	    }
+              	    Adw.ActionRow{
+              	      title: _("Fajr");
+              	      subtitle: _("2 rakaat");
+              	      Gtk.Label{
+              	        valign: center;
+              	      	label: _("03:15 AM");
+              	      }
+              	    }
+              	  }
+              	};
+              	/* Gtk.Label {
+                   styles ["title-2"]
+                   label: _("[Calendar] Hello, world!");
+                }; */
+              };
+
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "qibla";
+            title: C_("Navigation", "Qibla");
+            icon-name: "mark-location-symbolic";
+            child: Gtk.Label {
+              styles ["title-2"]
+              label: _("[Qibla] Hello, world!");
+            };
+          }
+
+          Adw.ViewStackPage {
+            name: "calendar";
+            title: C_("Navigation", "Calendar");
+            icon-name: "x-office-calendar-symbolic";
+            child:  Gtk.Label {
+                   styles ["title-2"]
+                   label: _("[Calendar] Hello, world!");
+                };
+
+
+          }
+
+          Adw.ViewStackPage {
+            name: "options";
+            title: C_("Navigation", "Options");
+            icon-name: "applications-system-symbolic";
+            child: Gtk.Label {
+              styles ["title-2"]
+              label: "[Options] Hello, world!";
+              name: "Qibla";
+            };
+          }
+        }
+      }
+    }
   }
 }

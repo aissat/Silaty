@@ -1,44 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="true">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="accel">&lt;primary&gt;p</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="true">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="true">_About silaty</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
   <template class="SilatyWindow" parent="GtkApplicationWindow">
-    <property name="default-width">600</property>
+    <property name="default-width">560</property>
     <property name="default-height">300</property>
+    <property name="width-request">560</property>
+    <style>
+      <class name="devel"/>
+    </style>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="header_bar">
-        <child type="end">
-          <object class="GtkMenuButton">
-            <property name="icon-name">open-menu-symbolic</property>
-            <property name="menu-model">primary_menu</property>
+      <object class="AdwHeaderBar" id="header_bar">
+        <child type="title">
+          <object class="AdwViewSwitcherTitle" id="title">
+            <property name="stack">view_stack</property>
           </object>
         </child>
       </object>
     </child>
     <child>
-      <object class="GtkLabel" id="label">
-        <property name="label">Hello, World!</property>
-        <attributes>
-          <attribute name="weight" value="bold"/>
-          <attribute name="scale" value="2"/>
-        </attributes>
+      <object class="AdwLeaflet" id="leaflet">
+        <property name="can-navigate-back">true</property>
+        <property name="can-unfold">false</property>
+        <child>
+          <object class="GtkBox" id="main_view">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="AdwViewStack" id="view_stack">
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">home</property>
+                        <property name="title" translatable="true" context="Navigation">Home</property>
+                        <property name="icon-name">user-home-symbolic</property>
+                        <property name="child">
+                          <object class="AdwStatusPage">
+                            <property name="description">Tuesday, May 17, 2022</property>
+                            <property name="child">
+                              <object class="AdwClamp">
+                                <property name="maximum-size">400</property>
+                                <property name="tightening-threshold">300</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="AdwPreferencesGroup">
+                                        <child>
+                                          <object class="AdwActionRow">
+                                            <property name="title" translatable="true">Fajr</property>
+                                            <property name="child">
+                                              <object class="GtkButton">
+                                                <property name="valign">center</property>
+                                                <property name="label" translatable="true">03:15 AM</property>
+                                              </object>
+                                            </property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="AdwActionRow">
+                                            <property name="title" translatable="true">Fajr</property>
+                                            <property name="subtitle" translatable="true">2 rakaat</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="AdwActionRow">
+                                            <property name="title" translatable="true">Fajr</property>
+                                            <property name="subtitle" translatable="true">2 rakaat</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="AdwActionRow">
+                                            <property name="title" translatable="true">Fajr</property>
+                                            <property name="subtitle" translatable="true">2 rakaat</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="AdwActionRow">
+                                            <property name="title" translatable="true">Fajr</property>
+                                            <property name="subtitle" translatable="true">2 rakaat</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                              </object>
+                            </property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">qibla</property>
+                        <property name="title" translatable="true" context="Navigation">Qibla</property>
+                        <property name="icon-name">mark-location-symbolic</property>
+                        <property name="child">
+                          <object class="GtkLabel">
+                            <style>
+                              <class name="title-2"/>
+                            </style>
+                            <property name="label" translatable="true">[Qibla] Hello, world!</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">calendar</property>
+                        <property name="title" translatable="true" context="Navigation">Calendar</property>
+                        <property name="icon-name">x-office-calendar-symbolic</property>
+                        <property name="child">
+                          <object class="GtkLabel">
+                            <style>
+                              <class name="title-2"/>
+                            </style>
+                            <property name="label" translatable="true">[Calendar] Hello, world!</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwViewStackPage">
+                        <property name="name">options</property>
+                        <property name="title" translatable="true" context="Navigation">Options</property>
+                        <property name="icon-name">applications-system-symbolic</property>
+                        <property name="child">
+                          <object class="GtkLabel">
+                            <style>
+                              <class name="title-2"/>
+                            </style>
+                            <property name="label">[Options] Hello, world!</property>
+                            <property name="name">Qibla</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
-  <menu id="primary_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-        <attribute name="action">app.preferences</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-        <attribute name="action">win.show-help-overlay</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_About silaty</attribute>
-        <attribute name="action">app.about</attribute>
-      </item>
-    </section>
-  </menu>
 </interface>
-
