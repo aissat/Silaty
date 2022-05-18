@@ -23,20 +23,23 @@ menu primary_menu {
 }
 
 
-template SilatyWindow : Gtk.ApplicationWindow {
-  default-width : 560;
-  default-height : 600;
-  width-request: 560;
-  height-request: 600;
-  styles ["devel"]
+  template SilatyWindow : Gtk.ApplicationWindow {
+    default-width : 300;
+    //width-request: 500;
+    //default-height : 300;
+    //height-request: 200;
+    styles ["devel"]
 
-  [titlebar]
-  Adw.HeaderBar header_bar {
-      //centering-policy: strict;
+    [titlebar]
+    Adw.HeaderBar header_bar {
+      centering-policy: strict;
 
       [title]
       Adw.ViewSwitcherTitle title {
             stack: view_stack;
+            title: _("Silaty");
+            subtitle: _("Muslim App");
+
       }
 
       /*[start]
@@ -44,97 +47,111 @@ template SilatyWindow : Gtk.ApplicationWindow {
         icon-name : "open-menu-symbolic";
         menu-model: primary_menu;
       }*/
-  }
+    }
+    Gtk.Box{
+      orientation: vertical;
+      Adw.ViewStack view_stack {
+        Adw.ViewStackPage {
+          name: "home";
+          title: C_("Navigation", "Home");
+          icon-name: "user-home-symbolic";
+          child: Adw.StatusPage {
+            title: '21:22';
+            description: 'Tuesday, May 17, 2022';
+            child: Adw.Clamp{
+              maximum-size: 400;
+              tightening-threshold: 300;
+              Adw.PreferencesGroup{
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
+                }
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
+                }
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
+                }
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
+                }
 
-
-  Adw.ViewStack view_stack {
-
-    Adw.ViewStackPage {
-      name: "home";
-      title: C_("Navigation", "Home");
-      icon-name: "user-home-symbolic";
-      child: Adw.StatusPage {
-        title: '21:22';
-        description: 'Tuesday, May 17, 2022';
-        child: Adw.Clamp{
-          maximum-size: 400;
-          tightening-threshold: 300;
-            Adw.PreferencesGroup{
-              Adw.ActionRow{
-                title: _("Fajr");
-                subtitle: _("2 rakaat");
-                Gtk.Label{
-                  valign: center;
-                  label: _("03:15 AM");
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
+                }
+                Adw.ActionRow{
+                  title: _("Fajr");
+                  subtitle: _("2 rakaat");
+                  Gtk.Label{
+                    valign: center;
+                    label: _("03:15 AM");
+                  }
                 }
               }
-              Adw.ActionRow{
-                title: _("Fajr");
-                subtitle: _("2 rakaat");
-                Gtk.Label{
-                  valign: center;
-                  label: _("03:15 AM");
-                }
-              }
-              Adw.ActionRow{
-                title: _("Fajr");
-                subtitle: _("2 rakaat");
-                Gtk.Label{
-                  valign: center;
-                  label: _("03:15 AM");
-                }
-              }
-              Adw.ActionRow{
-                title: _("Fajr");
-                subtitle: _("2 rakaat");
-                Gtk.Label{
-                  valign: center;
-                  label: _("03:15 AM");
-                }
-              }
-              Adw.ActionRow{
-                title: _("Fajr");
-                subtitle: _("2 rakaat");
-                Gtk.Label{
-                  valign: center;
-                  label: _("03:15 AM");
-                }
-              }
-            }
+            };
           };
+        }
+        Adw.ViewStackPage {
+          name: "qibla";
+          title: C_("Navigation", "Qibla");
+          icon-name: "mark-location-symbolic";
+          child: Gtk.Label {
+            styles ["large-title"]
+            label: _("[Qibla] Hello, world!");
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "calendar";
+          title: C_("Navigation", "Calendar");
+          icon-name: "x-office-calendar-symbolic";
+          child:  Gtk.Label {
+            styles ["title-2"]
+            label: _("[Calendar] Hello, world!");
+          };
+        }
+
+      Adw.ViewStackPage {
+        name: "options";
+        title: C_("Navigation", "Options");
+        icon-name: "applications-system-symbolic";
+        child: Gtk.Label {
+          styles ["title-2"]
+          label: "[Options] Hello, world!";
+          name: "Qibla";
         };
       }
-
-
-    Adw.ViewStackPage {
-      name: "qibla";
-      title: C_("Navigation", "Qibla");
-      icon-name: "mark-location-symbolic";
-      child: Gtk.Label {
-        styles ["large-title"]
-        label: _("[Qibla] Hello, world!");
-      };
     }
 
-    Adw.ViewStackPage {
-      name: "calendar";
-      title: C_("Navigation", "Calendar");
-      icon-name: "x-office-calendar-symbolic";
-      child:  Gtk.Label {
-              styles ["title-2"]
-              label: _("[Calendar] Hello, world!");
-          };
-    }
-
-    Adw.ViewStackPage {
-      name: "options";
-      title: C_("Navigation", "Options");
-      icon-name: "applications-system-symbolic";
-      child: Gtk.Label {
-        styles ["title-2"]
-        label: "[Options] Hello, world!";
-        name: "Qibla";
-      };
+    Adw.ViewSwitcherBar {
+      stack: view_stack;
+      reveal: bind title.title-visible;
+      valign: end;
+      vexpand: true;
     }
   }
 }
